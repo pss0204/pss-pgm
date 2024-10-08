@@ -5,12 +5,12 @@
 
 #define NUM_THREADS 2
 
-int shared_variable = 0;
+
 
 void test_race() {
-    register int x5 asm ("x5") = (int)&shared_variable;
-    register int x6 asm ("x6") = 0;
-    register int x7 asm ("x7") = 1;
+    register int x5 asm ("x5") = 1;
+    register int x6 asm ("x6") = 2;
+    register int x7 asm ("x7") = 3;
 
     asm volatile (
         ".word 0b00000000011100101001001011111011    # TEST_RACE x6, x5, x7"
