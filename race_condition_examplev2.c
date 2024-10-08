@@ -2,7 +2,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <sys/wait.h>
-//버전2는 부모랑 자식 프로세스 분리함 
+//버전2는 부모랑 자식 프로세스
 #define NUM_process 2
 
 
