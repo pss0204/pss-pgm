@@ -1,42 +1,51 @@
 #include <stdint.h>
 #include <stdio.h>
-#include <stdbool.h>
 
-// MMIO 주소 정의
-#define MMIO_ACCESS_HISTORY_BASE 0x20000000
-#define MMIO_ACCESS_HISTORY_SIZE 10
-#define ENTRY_SIZE_BYTES 32
+// 레지스터 값을 읽는 인라인 함수
+static inline uint32_t read_register(int reg_num) {
+    uint32_t value;
+    asm volatile ("mv %0, x%1" : "=r"(value) : "i"(reg_num));
+    return value;
+}
 
-typedef struct {
-    uint32_t pc;         // 0~3 바이트
-    uint32_t rs1_addr;   // 4~7 바이트
-    uint32_t rs2_addr;   // 8~11 바이트
-    uint32_t flags;      // 12~15 바이트 (isLoad, isStore, 나머지 30비트는 0)
-    uint32_t hartid;     // 16~19 바이트
-    uint32_t num_src;    // 20~23 바이트
-    uint32_t reserved[2];// 24~31 바이트 (예약)
-} MemoryAccess;
+// 레지스터 값을 쓰는 인라인 함수
+static inline void write_register(int reg_num, uint32_t value) {
+    asm volatile ("mv x%0, %1" : : "i"(reg_num), "r"(value));
+}
+
+// 로드 명령어 실행 함수
+void execute_load(uint32_t* addr) {
+    uint32_t value;
+    asm volatile ("lw %0, 0(%1)" : "=r"(value) : "r"(addr));
+}
 
 int main() {
-    // MMIO 주소를 메모리로 매핑 (가상 예시)
-    volatile MemoryAccess* accessHistory = (MemoryAccess*)MMIO_ACCESS_HISTORY_BASE;
+    // 테스트용 메모리 주소
+    uint32_t test_memory[1] = {0xdeadbeef};
 
-    for(int i = 0; i < MMIO_ACCESS_HISTORY_SIZE; i++) {
-        MemoryAccess entry = accessHistory[i];
+    // 관련 레지스터 초기화
+    write_register(5, 0x11111111);  // RS1 Addr
+    write_register(6, 0x22222222);  // RS2 Addr
+    write_register(7, 0x33333333);  // Hart ID
+    write_register(28, 0);          // Is Load
+    write_register(29, 0);          // Is Store
 
-        // flags에서 isLoad과 isStore 추출
-        bool isLoad = (entry.flags & 0x1) != 0;
-        bool isStore = (entry.flags & 0x2) != 0;
+    printf("초기화된 레지스터 값:\n");
+    printf("RS1 Addr (x5): 0x%08x\n", read_register(5));
+    printf("RS2 Addr (x6): 0x%08x\n", read_register(6));
+    printf("Hart ID (x7): 0x%08x\n", read_register(7));
+    printf("Is Load (x28): %u\n", read_register(28));
+    printf("Is Store (x29): %u\n\n", read_register(29));
 
-        printf("Access History %d:\n", i);
-        printf("  PC: 0x%08x\n", entry.pc);
-        printf("  RS1 Addr: 0x%08x\n", entry.rs1_addr);
-        printf("  RS2 Addr: 0x%08x\n", entry.rs2_addr);
-        printf("  Is Load: %d\n", isLoad);
-        printf("  Is Store: %d\n", isStore);
-        printf("  Hart ID: %d\n", entry.hartid);
-        printf("  Num Src: %d\n\n", entry.num_src);
-    }
+    // 로드 명령어 실행
+    execute_load(test_memory);
+
+    printf("로드 명령어 실행 후 레지스터 값:\n");
+    printf("RS1 Addr (x5): 0x%08x\n", read_register(5));
+    printf("RS2 Addr (x6): 0x%08x\n", read_register(6));
+    printf("Hart ID (x7): 0x%08x\n", read_register(7));
+    printf("Is Load (x28): %u\n", read_register(28));
+    printf("Is Store (x29): %u\n", read_register(29));
 
     return 0;
 }
