@@ -1,0 +1,8 @@
+.section .text
+.globl TEST_RACE
+TEST_RACE:
+    .word 0b00000000011100101001001011111011    # TEST_RACE x6, x5, x7
+
+    .globl PARK
+PARK:
+    .word 0b000000011110111010101110011111011    # PARK x28, x29, x30 

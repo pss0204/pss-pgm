@@ -1,0 +1,266 @@
+
+data_race_park:     file format elf64-littleriscv
+
+
+Disassembly of section .plt:
+
+0000000000010460 <_PROCEDURE_LINKAGE_TABLE_>:
+   10460:	97 23 00 00 33 03 c3 41 03 be 03 ba 13 03 43 fd     .#..3..A......C.
+   10470:	93 82 03 ba 13 53 13 00 83 b2 82 00 67 00 0e 00     .....S......g...
+
+0000000000010480 <printf@plt>:
+   10480:	00002e17          	auipc	t3,0x2
+   10484:	b90e3e03          	ld	t3,-1136(t3) # 12010 <printf@GLIBC_2.26>
+   10488:	000e0367          	jalr	t1,t3
+   1048c:	00000013          	nop
+
+0000000000010490 <pthread_create@plt>:
+   10490:	00002e17          	auipc	t3,0x2
+   10494:	b88e3e03          	ld	t3,-1144(t3) # 12018 <pthread_create@GLIBC_2.26>
+   10498:	000e0367          	jalr	t1,t3
+   1049c:	00000013          	nop
+
+00000000000104a0 <pthread_join@plt>:
+   104a0:	00002e17          	auipc	t3,0x2
+   104a4:	b80e3e03          	ld	t3,-1152(t3) # 12020 <pthread_join@GLIBC_2.26>
+   104a8:	000e0367          	jalr	t1,t3
+   104ac:	00000013          	nop
+
+00000000000104b0 <__libc_start_main@plt>:
+   104b0:	00002e17          	auipc	t3,0x2
+   104b4:	b78e3e03          	ld	t3,-1160(t3) # 12028 <__libc_start_main@GLIBC_2.26>
+   104b8:	000e0367          	jalr	t1,t3
+   104bc:	00000013          	nop
+
+Disassembly of section .text:
+
+00000000000104c0 <_start>:
+   104c0:	02c000ef          	jal	ra,104ec <_start+0x2c>
+   104c4:	87aa                	mv	a5,a0
+   104c6:	00000517          	auipc	a0,0x0
+   104ca:	0ec50513          	addi	a0,a0,236 # 105b2 <main>
+   104ce:	6582                	ld	a1,0(sp)
+   104d0:	0030                	addi	a2,sp,8
+   104d2:	ff017113          	andi	sp,sp,-16
+   104d6:	00000697          	auipc	a3,0x0
+   104da:	17668693          	addi	a3,a3,374 # 1064c <__libc_csu_init>
+   104de:	00000717          	auipc	a4,0x0
+   104e2:	1c670713          	addi	a4,a4,454 # 106a4 <__libc_csu_fini>
+   104e6:	880a                	mv	a6,sp
+   104e8:	fc9ff06f          	j	104b0 <__libc_start_main@plt>
+   104ec:	00002197          	auipc	gp,0x2
+   104f0:	34c18193          	addi	gp,gp,844 # 12838 <__global_pointer$>
+   104f4:	8082                	ret
+
+00000000000104f6 <deregister_tm_clones>:
+   104f6:	6549                	lui	a0,0x12
+   104f8:	6749                	lui	a4,0x12
+   104fa:	00050793          	mv	a5,a0
+   104fe:	00070713          	mv	a4,a4
+   10502:	00f70b63          	beq	a4,a5,10518 <deregister_tm_clones+0x22>
+   10506:	00000337          	lui	t1,0x0
+   1050a:	00030313          	mv	t1,t1
+   1050e:	00030563          	beqz	t1,10518 <deregister_tm_clones+0x22>
+   10512:	00050513          	mv	a0,a0
+   10516:	8302                	jr	t1
+   10518:	8082                	ret
+
+000000000001051a <register_tm_clones>:
+   1051a:	6549                	lui	a0,0x12
+   1051c:	00050793          	mv	a5,a0
+   10520:	6749                	lui	a4,0x12
+   10522:	00070593          	mv	a1,a4
+   10526:	8d9d                	sub	a1,a1,a5
+   10528:	858d                	srai	a1,a1,0x3
+   1052a:	03f5d793          	srli	a5,a1,0x3f
+   1052e:	95be                	add	a1,a1,a5
+   10530:	8585                	srai	a1,a1,0x1
+   10532:	c991                	beqz	a1,10546 <register_tm_clones+0x2c>
+   10534:	00000337          	lui	t1,0x0
+   10538:	00030313          	mv	t1,t1
+   1053c:	00030563          	beqz	t1,10546 <register_tm_clones+0x2c>
+   10540:	00050513          	mv	a0,a0
+   10544:	8302                	jr	t1
+   10546:	8082                	ret
+
+0000000000010548 <__do_global_dtors_aux>:
+   10548:	1141                	addi	sp,sp,-16
+   1054a:	e022                	sd	s0,0(sp)
+   1054c:	8141c783          	lbu	a5,-2028(gp) # 1204c <completed.5770>
+   10550:	e406                	sd	ra,8(sp)
+   10552:	e791                	bnez	a5,1055e <__do_global_dtors_aux+0x16>
+   10554:	fa3ff0ef          	jal	ra,104f6 <deregister_tm_clones>
+   10558:	4785                	li	a5,1
+   1055a:	80f18a23          	sb	a5,-2028(gp) # 1204c <completed.5770>
+   1055e:	60a2                	ld	ra,8(sp)
+   10560:	6402                	ld	s0,0(sp)
+   10562:	0141                	addi	sp,sp,16
+   10564:	8082                	ret
+
+0000000000010566 <frame_dummy>:
+   10566:	fb5ff06f          	j	1051a <register_tm_clones>
+
+000000000001056a <increment>:
+#define PARK_LABEL do { \
+    __asm__ __volatile__ (".globl PARK\n" \
+                          "PARK:"); \
+} while(0)
+
+void* increment(void* arg) {
+   1056a:	7179                	addi	sp,sp,-48
+   1056c:	f422                	sd	s0,40(sp)
+   1056e:	1800                	addi	s0,sp,48
+   10570:	fca43c23          	sd	a0,-40(s0)
+    for(int i = 0; i < NUM_ITERATIONS; i++) {
+   10574:	fe042623          	sw	zero,-20(s0)
+   10578:	a831                	j	10594 <increment+0x2a>
+        __asm__ __volatile__(
+   1057a:	67c9                	lui	a5,0x12
+   1057c:	04878793          	addi	a5,a5,72 # 12048 <_edata>
+   10580:	0007a283          	lw	t0,0(a5)
+   10584:	0285                	addi	t0,t0,1
+   10586:	0057a023          	sw	t0,0(a5)
+    for(int i = 0; i < NUM_ITERATIONS; i++) {
+   1058a:	fec42783          	lw	a5,-20(s0)
+   1058e:	2785                	addiw	a5,a5,1
+   10590:	fef42623          	sw	a5,-20(s0)
+   10594:	fec42783          	lw	a5,-20(s0)
+   10598:	0007871b          	sext.w	a4,a5
+   1059c:	000f47b7          	lui	a5,0xf4
+   105a0:	23f78793          	addi	a5,a5,575 # f423f <__global_pointer$+0xe1a07>
+   105a4:	fce7dbe3          	ble	a4,a5,1057a <increment+0x10>
+            :
+            : "r" (&counter)       // counter의 주소를 입력으로 사용
+            : "t0", "memory"
+        ); // 인라인 어셈블리를 사용한 직접 로드/스토어 데이터 레이스 발생 지점
+    }
+    return NULL;
+   105a8:	4781                	li	a5,0
+}
+   105aa:	853e                	mv	a0,a5
+   105ac:	7422                	ld	s0,40(sp)
+   105ae:	6145                	addi	sp,sp,48
+   105b0:	8082                	ret
+
+00000000000105b2 <main>:
+
+int main() {
+   105b2:	7179                	addi	sp,sp,-48
+   105b4:	f406                	sd	ra,40(sp)
+   105b6:	f022                	sd	s0,32(sp)
+   105b8:	1800                	addi	s0,sp,48
+
+00000000000105ba <PARK>:
+    // TEST_RACE 레이블 삽입
+   
+    PARK_LABEL;
+
+    // 두 개의 스레드 생성
+    for(int i = 0; i < NUM_THREADS; i++) {
+   105ba:	fe042623          	sw	zero,-20(s0)
+   105be:	a02d                	j	105e8 <PARK+0x2e>
+        pthread_create(&threads[i], NULL, increment, NULL);
+   105c0:	fd840713          	addi	a4,s0,-40
+   105c4:	fec42783          	lw	a5,-20(s0)
+   105c8:	078e                	slli	a5,a5,0x3
+   105ca:	973e                	add	a4,a4,a5
+   105cc:	4681                	li	a3,0
+   105ce:	000107b7          	lui	a5,0x10
+   105d2:	56a78613          	addi	a2,a5,1386 # 1056a <increment>
+   105d6:	4581                	li	a1,0
+   105d8:	853a                	mv	a0,a4
+   105da:	eb7ff0ef          	jal	ra,10490 <pthread_create@plt>
+    for(int i = 0; i < NUM_THREADS; i++) {
+   105de:	fec42783          	lw	a5,-20(s0)
+   105e2:	2785                	addiw	a5,a5,1
+   105e4:	fef42623          	sw	a5,-20(s0)
+   105e8:	fec42783          	lw	a5,-20(s0)
+   105ec:	0007871b          	sext.w	a4,a5
+   105f0:	4785                	li	a5,1
+   105f2:	fce7d7e3          	ble	a4,a5,105c0 <PARK+0x6>
+    }
+
+    // 모든 스레드가 종료될 때까지 대기
+    for(int i = 0; i < NUM_THREADS; i++) {
+   105f6:	fe042423          	sw	zero,-24(s0)
+   105fa:	a015                	j	1061e <PARK+0x64>
+        pthread_join(threads[i], NULL);
+   105fc:	fe842783          	lw	a5,-24(s0)
+   10600:	078e                	slli	a5,a5,0x3
+   10602:	ff040713          	addi	a4,s0,-16
+   10606:	97ba                	add	a5,a5,a4
+   10608:	fe87b783          	ld	a5,-24(a5)
+   1060c:	4581                	li	a1,0
+   1060e:	853e                	mv	a0,a5
+   10610:	e91ff0ef          	jal	ra,104a0 <pthread_join@plt>
+    for(int i = 0; i < NUM_THREADS; i++) {
+   10614:	fe842783          	lw	a5,-24(s0)
+   10618:	2785                	addiw	a5,a5,1
+   1061a:	fef42423          	sw	a5,-24(s0)
+   1061e:	fe842783          	lw	a5,-24(s0)
+   10622:	0007871b          	sext.w	a4,a5
+   10626:	4785                	li	a5,1
+   10628:	fce7dae3          	ble	a4,a5,105fc <PARK+0x42>
+
+000000000001062c <TEST_RACE>:
+    }
+
+    // PARK 레이블 삽입
+     TEST_RACE_LABEL;
+
+    printf("최종 카운터 값: %d\n", counter);
+   1062c:	67c9                	lui	a5,0x12
+   1062e:	0487a783          	lw	a5,72(a5) # 12048 <_edata>
+   10632:	2781                	sext.w	a5,a5
+   10634:	85be                	mv	a1,a5
+   10636:	67c1                	lui	a5,0x10
+   10638:	6a878513          	addi	a0,a5,1704 # 106a8 <__libc_csu_fini+0x4>
+   1063c:	e45ff0ef          	jal	ra,10480 <printf@plt>
+    return 0;
+   10640:	4781                	li	a5,0
+   10642:	853e                	mv	a0,a5
+   10644:	70a2                	ld	ra,40(sp)
+   10646:	7402                	ld	s0,32(sp)
+   10648:	6145                	addi	sp,sp,48
+   1064a:	8082                	ret
+
+000000000001064c <__libc_csu_init>:
+   1064c:	7139                	addi	sp,sp,-64
+   1064e:	f822                	sd	s0,48(sp)
+   10650:	f04a                	sd	s2,32(sp)
+   10652:	00001417          	auipc	s0,0x1
+   10656:	7be40413          	addi	s0,s0,1982 # 11e10 <__frame_dummy_init_array_entry>
+   1065a:	00001917          	auipc	s2,0x1
+   1065e:	7be90913          	addi	s2,s2,1982 # 11e18 <__init_array_end>
+   10662:	40890933          	sub	s2,s2,s0
+   10666:	fc06                	sd	ra,56(sp)
+   10668:	f426                	sd	s1,40(sp)
+   1066a:	ec4e                	sd	s3,24(sp)
+   1066c:	e852                	sd	s4,16(sp)
+   1066e:	e456                	sd	s5,8(sp)
+   10670:	40395913          	srai	s2,s2,0x3
+   10674:	00090f63          	beqz	s2,10692 <__libc_csu_init+0x46>
+   10678:	8ab2                	mv	s5,a2
+   1067a:	8a2e                	mv	s4,a1
+   1067c:	89aa                	mv	s3,a0
+   1067e:	4481                	li	s1,0
+   10680:	601c                	ld	a5,0(s0)
+   10682:	8656                	mv	a2,s5
+   10684:	85d2                	mv	a1,s4
+   10686:	854e                	mv	a0,s3
+   10688:	0485                	addi	s1,s1,1
+   1068a:	9782                	jalr	a5
+   1068c:	0421                	addi	s0,s0,8
+   1068e:	fe9919e3          	bne	s2,s1,10680 <__libc_csu_init+0x34>
+   10692:	70e2                	ld	ra,56(sp)
+   10694:	7442                	ld	s0,48(sp)
+   10696:	74a2                	ld	s1,40(sp)
+   10698:	7902                	ld	s2,32(sp)
+   1069a:	69e2                	ld	s3,24(sp)
+   1069c:	6a42                	ld	s4,16(sp)
+   1069e:	6aa2                	ld	s5,8(sp)
+   106a0:	6121                	addi	sp,sp,64
+   106a2:	8082                	ret
+
+00000000000106a4 <__libc_csu_fini>:
+   106a4:	8082                	ret
