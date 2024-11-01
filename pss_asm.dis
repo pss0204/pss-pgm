@@ -102,7 +102,7 @@ int main() {
    104b4:	67c1                	lui	a5,0x10
    104b6:	55078513          	addi	a0,a5,1360 # 10550 <__libc_csu_fini+0x8>
    104ba:	f27ff0ef          	jal	ra,103e0 <puts@plt>
-   104be:	fec5850b          	0xfec5850b #PARK x10, x11, x12
+   104be:	fec5850b          	0xfec5850b
     __asm__ __volatile__(
    104c2:	4282                	lw	t0,0(sp)
    104c4:	4312                	lw	t1,4(sp)
@@ -114,8 +114,8 @@ int main() {
    104d4:	4f52                	lw	t5,20(sp)
    104d6:	01ee8fb3          	add	t6,t4,t5
    104da:	cc7e                	sw	t6,24(sp)
-   104dc:	fec5850b          	0xfec5850b #PARK x10, x11, x12
-   104e0:	007292fb          	0x7292fb #TEST_RACE x6, x5, x7
+   104dc:	fec5850b          	0xfec5850b
+   104e0:	007292fb          	0x7292fb
         ".word 0b00000000011100101001001011111011    # TEST_RACE x6, x5, x7\n\t"
         :
         :
