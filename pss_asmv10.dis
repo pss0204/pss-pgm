@@ -97,7 +97,7 @@ Disassembly of section .text:
    104b4:	67c1                	lui	a5,0x10
    104b6:	55078513          	addi	a0,a5,1360 # 10550 <__libc_csu_fini+0x2>
    104ba:	f27ff0ef          	jal	ra,103e0 <puts@plt>
-   104be:	ffce8f0b          	0xffce8f0b
+   104be:	ffce8f0b          	0xffce8f0b//park x28, x29, x30
    104c2:	01ff0eb3          	add	t4,t5,t6
    104c6:	01ff0eb3          	add	t4,t5,t6
    104ca:	01ff0eb3          	add	t4,t5,t6
@@ -108,8 +108,8 @@ Disassembly of section .text:
    104dc:	4282                	lw	t0,0(sp)
    104de:	c016                	sw	t0,0(sp)
    104e0:	4282                	lw	t0,0(sp)
-   104e2:	ffce8f0b          	0xffce8f0b
-   104e6:	007292fb          	0x7292fb
+   104e2:	ffce8f0b          	0xffce8f0b//park x28, x29, x30
+   104e6:	007292fb          	0x7292fb//test_race x6, x5, x7
    104ea:	4781                	li	a5,0
    104ec:	853e                	mv	a0,a5
    104ee:	60a2                	ld	ra,8(sp)
