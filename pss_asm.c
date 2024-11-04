@@ -9,8 +9,6 @@ int main() {
         "add t4, t5, t6\n\t"
         "add t4, t5, t6\n\t"
         "add t4, t5, t6\n\t"
-        "add t4, t5, t6\n\t"
-        "add t4, t5, t6\n\t"
         "sw t4, 0(sp)\n\t"
         "lw t0, 0(sp)\n\t"
         "sw t0, 0(sp)\n\t"
