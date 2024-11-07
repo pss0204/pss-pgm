@@ -5,7 +5,15 @@ int main() {
     printf("Hello, World!\n");
     __asm__ __volatile__(
         ".word 0b11111111110011101000111100001011   # PARK x28, x29, x30\n\t"
-       
+        "sw t0, 0(sp)\n\t"
+        "lw t0, 0(sp)\n\t"
+        "sw t0, 0(sp)\n\t"
+        "lw t0, 0(sp)\n\t"
+        "sw t0, 0(sp)\n\t"
+        "lw t0, 0(sp)\n\t"
+        "sw t0, 0(sp)\n\t"
+        "sw t0, 0(sp)\n\t"  
+        "lw t0, 0(sp)\n\t"
         "sw t2, 0(sp)\n\t"
         "lw t0, 0(sp)\n\t"
         "sw t1, 0(sp)\n\t"
