@@ -33,7 +33,21 @@ int main() {
         "lw t0, (t1)\n\t"         // counter 값을 읽음
         "nop\n\t"                 // 의도적 지연
         "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
         "addi t0, t0, 1\n\t"      // 값 증가
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
         "nop\n\t"
         "sw t0, (t1)\n\t"         // 값 저장
         :
