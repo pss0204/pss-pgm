@@ -10,9 +10,9 @@ void* increment(void* arg) {
     for(int i = 0; i < NUM_ITERATIONS; i++) {
         __asm__ __volatile__(
             "la t1, counter\n\t"   // counter의 주소를 t1에 로드
-            "lw t0, 0(a5)\n\t"     // counter 값을 t0에 로드
+            "lw t0, 0(t1)\n\t"     // counter 값을 t0에 로드
             "addi t0, t0, 1\n\t"   // t0 값 증가
-            "sw t0, 0(a5)"         // 증가된 값을 counter에 저장
+            "sw t0, 0(t1)"         // 증가된 값을 counter에 저장
             :
             : 
             : "t0", "t1", "memory"
@@ -30,7 +30,7 @@ int main() {
     // 여기서 counter 변수를 직접 수정하는 코드
     __asm__ __volatile__(
         "la t1, counter\n\t"      // counter 주소를 t1에 로드
-        "lw t0, (t1)\n\t"         // counter 값을 읽음
+        "lw t0, 0(t1)\n\t"         // counter 값을 읽음
         "nop\n\t"                 // 의도적 지연
         "nop\n\t"
         "nop\n\t"
@@ -49,7 +49,7 @@ int main() {
         "nop\n\t"
         "nop\n\t"
         "nop\n\t"
-        "sw t0, (t1)\n\t"         // 값 저장
+        "sw t0, 0(t1)\n\t"         // 값 저장
         :
         : 
         : "t0", "t1", "memory"

@@ -209,7 +209,7 @@ Disassembly of section .text:
 
 
    
-   1066a:	007292fb          	0x7292fb
+   1066a:	007292fb          	0x7292fb//race
    1066e:	67c9                	lui	a5,0x12
    10670:	0487a783          	lw	a5,72(a5) # 12048 <_edata>
    10674:	2781                	sext.w	a5,a5
