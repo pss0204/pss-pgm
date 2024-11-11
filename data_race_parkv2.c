@@ -68,6 +68,21 @@ int main() {
     // 두 번째 PARK와 TEST_RACE
     __asm__ __volatile__(
         ".word 0b11111111110011101000111100001011\n\t"    // PARK
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
+        "nop\n\t"
         ".word 0b00000000011100101001001011111011\n\t"    // TEST_RACE
         :
         :

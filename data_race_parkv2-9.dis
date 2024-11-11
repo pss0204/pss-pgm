@@ -1,5 +1,5 @@
 
-data_race_parkv2-8:     file format elf64-littleriscv
+data_race_parkv2-9:     file format elf64-littleriscv
 
 
 Disassembly of section .plt:
@@ -43,9 +43,9 @@ Disassembly of section .text:
    104d0:	0030                	addi	a2,sp,8
    104d2:	ff017113          	andi	sp,sp,-16
    104d6:	00000697          	auipc	a3,0x0
-   104da:	1b868693          	addi	a3,a3,440 # 1068e <__libc_csu_init>
+   104da:	1d668693          	addi	a3,a3,470 # 106ac <__libc_csu_init>
    104de:	00000717          	auipc	a4,0x0
-   104e2:	20870713          	addi	a4,a4,520 # 106e6 <__libc_csu_fini>
+   104e2:	22670713          	addi	a4,a4,550 # 10704 <__libc_csu_fini>
    104e6:	880a                	mv	a6,sp
    104e8:	fc9ff06f          	j	104b0 <__libc_start_main@plt>
    104ec:	00002197          	auipc	gp,0x2
@@ -133,7 +133,7 @@ Disassembly of section .text:
    105ba:	1800                	addi	s0,sp,48
 
 
-
+   
    105bc:	ffce8f0b          	0xffce8f0b
    105c0:	00002317          	auipc	t1,0x2
    105c4:	a8830313          	addi	t1,t1,-1400 # 12048 <_edata>
@@ -194,62 +194,79 @@ Disassembly of section .text:
    10660:	4785                	li	a5,1
    10662:	fce7dae3          	ble	a4,a5,10636 <main+0x82>
    10666:	ffce8f0b          	0xffce8f0b
-   // 요 사이에 놉을 엄청 넣기
+   1066a:	0001                	nop
+   1066c:	0001                	nop
+   1066e:	0001                	nop
+   10670:	0001                	nop
+   10672:	0001                	nop
+   10674:	0001                	nop
+   10676:	0001                	nop
+   10678:	0001                	nop
+   1067a:	0001                	nop
+   1067c:	0001                	nop
+   1067e:	0001                	nop
+   10680:	0001                	nop
+   10682:	0001                	nop
+   10684:	0001                	nop
+   10686:	0001                	nop
+   10688:	007292fb          	0x7292fb
 
 
-   
-   1066a:	007292fb          	0x7292fb
-   1066e:	67c9                	lui	a5,0x12
-   10670:	0487a783          	lw	a5,72(a5) # 12048 <_edata>
-   10674:	2781                	sext.w	a5,a5
-   10676:	85be                	mv	a1,a5
-   10678:	67c1                	lui	a5,0x10
-   1067a:	6e878513          	addi	a0,a5,1768 # 106e8 <__libc_csu_fini+0x2>
-   1067e:	e03ff0ef          	jal	ra,10480 <printf@plt>
-   10682:	4781                	li	a5,0
-   10684:	853e                	mv	a0,a5
-   10686:	70a2                	ld	ra,40(sp)
-   10688:	7402                	ld	s0,32(sp)
-   1068a:	6145                	addi	sp,sp,48
-   1068c:	8082                	ret
 
-000000000001068e <__libc_csu_init>:
-   1068e:	7139                	addi	sp,sp,-64
-   10690:	f822                	sd	s0,48(sp)
-   10692:	f04a                	sd	s2,32(sp)
-   10694:	00001417          	auipc	s0,0x1
-   10698:	77c40413          	addi	s0,s0,1916 # 11e10 <__frame_dummy_init_array_entry>
-   1069c:	00001917          	auipc	s2,0x1
-   106a0:	77c90913          	addi	s2,s2,1916 # 11e18 <__init_array_end>
-   106a4:	40890933          	sub	s2,s2,s0
-   106a8:	fc06                	sd	ra,56(sp)
-   106aa:	f426                	sd	s1,40(sp)
-   106ac:	ec4e                	sd	s3,24(sp)
-   106ae:	e852                	sd	s4,16(sp)
-   106b0:	e456                	sd	s5,8(sp)
-   106b2:	40395913          	srai	s2,s2,0x3
-   106b6:	00090f63          	beqz	s2,106d4 <__libc_csu_init+0x46>
-   106ba:	8ab2                	mv	s5,a2
-   106bc:	8a2e                	mv	s4,a1
-   106be:	89aa                	mv	s3,a0
-   106c0:	4481                	li	s1,0
-   106c2:	601c                	ld	a5,0(s0)
-   106c4:	8656                	mv	a2,s5
-   106c6:	85d2                	mv	a1,s4
-   106c8:	854e                	mv	a0,s3
-   106ca:	0485                	addi	s1,s1,1
-   106cc:	9782                	jalr	a5
-   106ce:	0421                	addi	s0,s0,8
-   106d0:	fe9919e3          	bne	s2,s1,106c2 <__libc_csu_init+0x34>
-   106d4:	70e2                	ld	ra,56(sp)
-   106d6:	7442                	ld	s0,48(sp)
-   106d8:	74a2                	ld	s1,40(sp)
-   106da:	7902                	ld	s2,32(sp)
-   106dc:	69e2                	ld	s3,24(sp)
-   106de:	6a42                	ld	s4,16(sp)
-   106e0:	6aa2                	ld	s5,8(sp)
-   106e2:	6121                	addi	sp,sp,64
-   106e4:	8082                	ret
 
-00000000000106e6 <__libc_csu_fini>:
-   106e6:	8082                	ret
+
+
+   1068c:	67c9                	lui	a5,0x12
+   1068e:	0487a783          	lw	a5,72(a5) # 12048 <_edata>
+   10692:	2781                	sext.w	a5,a5
+   10694:	85be                	mv	a1,a5
+   10696:	67c1                	lui	a5,0x10
+   10698:	70878513          	addi	a0,a5,1800 # 10708 <__libc_csu_fini+0x4>
+   1069c:	de5ff0ef          	jal	ra,10480 <printf@plt>
+   106a0:	4781                	li	a5,0
+   106a2:	853e                	mv	a0,a5
+   106a4:	70a2                	ld	ra,40(sp)
+   106a6:	7402                	ld	s0,32(sp)
+   106a8:	6145                	addi	sp,sp,48
+   106aa:	8082                	ret
+
+00000000000106ac <__libc_csu_init>:
+   106ac:	7139                	addi	sp,sp,-64
+   106ae:	f822                	sd	s0,48(sp)
+   106b0:	f04a                	sd	s2,32(sp)
+   106b2:	00001417          	auipc	s0,0x1
+   106b6:	75e40413          	addi	s0,s0,1886 # 11e10 <__frame_dummy_init_array_entry>
+   106ba:	00001917          	auipc	s2,0x1
+   106be:	75e90913          	addi	s2,s2,1886 # 11e18 <__init_array_end>
+   106c2:	40890933          	sub	s2,s2,s0
+   106c6:	fc06                	sd	ra,56(sp)
+   106c8:	f426                	sd	s1,40(sp)
+   106ca:	ec4e                	sd	s3,24(sp)
+   106cc:	e852                	sd	s4,16(sp)
+   106ce:	e456                	sd	s5,8(sp)
+   106d0:	40395913          	srai	s2,s2,0x3
+   106d4:	00090f63          	beqz	s2,106f2 <__libc_csu_init+0x46>
+   106d8:	8ab2                	mv	s5,a2
+   106da:	8a2e                	mv	s4,a1
+   106dc:	89aa                	mv	s3,a0
+   106de:	4481                	li	s1,0
+   106e0:	601c                	ld	a5,0(s0)
+   106e2:	8656                	mv	a2,s5
+   106e4:	85d2                	mv	a1,s4
+   106e6:	854e                	mv	a0,s3
+   106e8:	0485                	addi	s1,s1,1
+   106ea:	9782                	jalr	a5
+   106ec:	0421                	addi	s0,s0,8
+   106ee:	fe9919e3          	bne	s2,s1,106e0 <__libc_csu_init+0x34>
+   106f2:	70e2                	ld	ra,56(sp)
+   106f4:	7442                	ld	s0,48(sp)
+   106f6:	74a2                	ld	s1,40(sp)
+   106f8:	7902                	ld	s2,32(sp)
+   106fa:	69e2                	ld	s3,24(sp)
+   106fc:	6a42                	ld	s4,16(sp)
+   106fe:	6aa2                	ld	s5,8(sp)
+   10700:	6121                	addi	sp,sp,64
+   10702:	8082                	ret
+
+0000000000010704 <__libc_csu_fini>:
+   10704:	8082                	ret
