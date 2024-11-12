@@ -100,7 +100,8 @@ Disassembly of section .text:
 0000000000010566 <frame_dummy>:
    10566:	fb5ff06f          	j	1051a <register_tm_clones>
 
-000000000001056a <increment>:
+000000000001056a <increment>:// 여기다 트래킹 하기 
+
    1056a:	7179                	addi	sp,sp,-48
    1056c:	f422                	sd	s0,40(sp)
    1056e:	1800                	addi	s0,sp,48
@@ -109,9 +110,11 @@ Disassembly of section .text:
    10578:	a839                	j	10596 <increment+0x2c>
    1057a:	00002317          	auipc	t1,0x2
    1057e:	ace30313          	addi	t1,t1,-1330 # 12048 <_edata>
+   // 
    10582:	00032283          	lw	t0,0(t1)
    10586:	0285                	addi	t0,t0,1
    10588:	00532023          	sw	t0,0(t1)
+   // 이 3개만 추적 하기 
    1058c:	fec42783          	lw	a5,-20(s0)
    10590:	2785                	addiw	a5,a5,1
    10592:	fef42623          	sw	a5,-20(s0)
@@ -133,7 +136,7 @@ Disassembly of section .text:
    105ba:	1800                	addi	s0,sp,48
 
 
-   
+
    105bc:	ffce8f0b          	0xffce8f0b
    105c0:	00002317          	auipc	t1,0x2
    105c4:	a8830313          	addi	t1,t1,-1400 # 12048 <_edata>
