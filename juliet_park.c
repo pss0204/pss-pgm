@@ -16,13 +16,13 @@ pthread_mutex_t gGoodLock;
 void* helperBad(void* args) {
     for(int i = 0; i < N_ITERS; i++) {
         __asm__ __volatile__(
-            "la t1, gBadInt\n\t"        // gBadInt의 주소를 t1 레지스터에 로드
-            "lw t0, 0(t1)\n\t"          // gBadInt 값을 t0 레지스터에 로드
+            "la t6, gBadInt\n\t"        // gBadInt의 주소를 t6 레지스터에 로드
+            "lw t0, 0(t6)\n\t"          // gBadInt 값을 t0 레지스터에 로드
             "addi t0, t0, 1\n\t"        // t0 값에 1을 더함
-            "sw t0, 0(t1)\n\t"          // 증가된 값을 gBadInt에 저장
+            "sw t0, 0(t6)\n\t"          // 증가된 값을 gBadInt에 저장
             :
             :
-            : "t0", "t1", "memory"
+            : "t0", "t6", "memory"
         );
     }
     return NULL;
