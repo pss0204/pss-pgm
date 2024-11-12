@@ -9,9 +9,11 @@ volatile int counter = 0;
 void* increment(void* arg) {
     for(int i = 0; i < NUM_ITERATIONS; i++) {
         __asm__ __volatile__(
+            ".word 0b11111111110011101000111100001011   # PARK x28, x29, x30\n\t"
             "lw t0, 0(%0)\n\t"    // counter 값을 t0 레지스터로 로드
             "addi t0, t0, 1\n\t"  // t0 값에 1을 더함
-            "sw t0, 0(%0)"        // t0 값을 다시 counter에 스토어
+            "sw t0, 0(%0)\n\t"    // t0 값을 다시 counter에 스토어
+            ".word 0b11111111110011101000111100001011   # PARK x28, x29, x30\n\t"
             :
             : "r" (&counter)       // counter의 주소를 입력으로 사용
             : "t0", "memory"
