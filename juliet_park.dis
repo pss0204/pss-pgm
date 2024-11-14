@@ -168,14 +168,21 @@ Disassembly of section .text:
    108a2:	fca43c23          	sd	a0,-40(s0)
    108a6:	fe042623          	sw	zero,-20(s0)
    108aa:	a829                	j	108c4 <helperBad+0x28>
-   108ac:	8141a783          	lw	a5,-2028(gp) # 1209c <gBadInt>
+
+   108ac:	8141a783          	lw	a5,-2028(gp) # 1209c <gBadInt>//
+
    108b0:	2785                	addiw	a5,a5,1
    108b2:	0007871b          	sext.w	a4,a5
-   108b6:	80e1aa23          	sw	a4,-2028(gp) # 1209c <gBadInt>
-   108ba:	fec42783          	lw	a5,-20(s0)
+
+   108b6:	80e1aa23          	sw	a4,-2028(gp) # 1209c <gBadInt>//
+
+   108ba:	fec42783          	lw	a5,-20(s0)//
    108be:	2785                	addiw	a5,a5,1
+
    108c0:	fef42623          	sw	a5,-20(s0)
-   108c4:	fec42783          	lw	a5,-20(s0)
+
+   108c4:	fec42783          	lw	a5,-20(s0)//
+   
    108c8:	0007871b          	sext.w	a4,a5
    108cc:	000f47b7          	lui	a5,0xf4
    108d0:	23f78793          	addi	a5,a5,575 # f423f <__global_pointer$+0xe19b7>

@@ -12,37 +12,19 @@ static volatile int gGoodInt = 0;
 // 뮤텍스 초기화
 pthread_mutex_t gGoodLock;
 
-// 취약한 함수: 락 없이 전역 변수 증가 (인라인 어셈블리 사용)
+// 취약한 함수: 락 없이 전역 변수 증가
 void* helperBad(void* args) {
     for(int i = 0; i < N_ITERS; i++) {
-        __asm__ __volatile__(
-            ".word 0b11111111110011101000111100001011   # PARK x28, x29, x30\n\t"
-            "la t6, gBadInt\n\t"        // gBadInt의 주소를 t6 레지스터에 로드
-            "lw t5, 0(t6)\n\t"          // gBadInt 값을 t5 레지스터에 로드
-            "addi t5, t5, 1\n\t"        // t5 값에 1을 더함
-            "sw t5, 0(t6)\n\t"          // 증가된 값을 gBadInt에 저장
-            ".word 0b11111111110011101000111100001011   # PARK x28, x29, x30\n\t"
-            :
-            :
-            : "t5", "t6", "memory"
-        );
+        gBadInt++;
     }
     return NULL;
 }
 
-// 안전한 함수: 뮤텍스를 사용하여 전역 변수 증가 (인라인 어셈블리 사용)
+// 안전한 함수: 뮤텍스를 사용하여 전역 변수 증가
 void* helperGood(void* args) {
     pthread_mutex_lock(&gGoodLock);
     for(int i = 0; i < N_ITERS; i++) {
-        __asm__ __volatile__(
-            "la t2, gGoodInt\n\t"       // gGoodInt의 주소를 t2 레지스터에 로드
-            "lw t0, 0(t2)\n\t"          // gGoodInt 값을 t0 레지스터에 로드
-            "addi t0, t0, 1\n\t"        // t0 값에 1을 더함
-            "sw t0, 0(t2)\n\t"          // 증가된 값을 gGoodInt에 저장
-            :
-            :
-            : "t0", "t2", "memory"
-        );
+        gGoodInt++;
     }
     pthread_mutex_unlock(&gGoodLock);
     return NULL;
