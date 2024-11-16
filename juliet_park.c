@@ -15,6 +15,7 @@ pthread_mutex_t gGoodLock;
 // 취약한 함수: 락 없이 전역 변수 증가
 void* helperBad(void* args) {
     for(int i = 0; i < N_ITERS; i++) {
+       
         gBadInt++;
     }
     return NULL;

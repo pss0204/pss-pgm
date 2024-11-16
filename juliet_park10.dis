@@ -177,13 +177,13 @@ Disassembly of section .text:
    108ba:	01efa023          	sw	t5,0(t6)
    108be:	ffce8f0b          	0xffce8f0b
 
-   //왜 똑같은 기능이 두번 나오는가 
+   
    108c2:	fec42783          	lw	a5,-20(s0)
    108c6:	2785                	addiw	a5,a5,1
    108c8:	fef42623          	sw	a5,-20(s0)
    108cc:	fec42783          	lw	a5,-20(s0)
 
-   
+
    108d0:	0007871b          	sext.w	a4,a5
    108d4:	000f47b7          	lui	a5,0xf4
    108d8:	23f78793          	addi	a5,a5,575 # f423f <__global_pointer$+0xe19b7>
